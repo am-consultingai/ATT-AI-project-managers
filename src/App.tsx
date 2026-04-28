@@ -460,18 +460,18 @@ const ThreeShifts = () => {
   return (
     <section id="shifts" className="py-24 px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row-reverse gap-12 lg:items-center">
+        <div className="flex flex-col lg:flex-row gap-12 lg:items-center">
           <div className="lg:w-1/3">
-            <div className="flex items-center gap-4 mb-4 lg:justify-end">
-              <h2 className="text-xl font-bold uppercase tracking-widest text-accent-indigo font-mono">The Transition</h2>
+            <div className="flex items-center gap-4 mb-4">
               <div className="w-8 h-8 rounded-full border border-accent-indigo/50 flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.3)]">
                 <div className="w-2 h-2 rounded-full bg-accent-indigo"></div>
               </div>
+              <h2 className="text-xl font-bold uppercase tracking-widest text-accent-indigo font-mono">The Transition</h2>
             </div>
-            <h3 className="text-4xl font-bold text-white mb-6 lg:text-right">
+            <h3 className="text-4xl font-bold text-white mb-6">
               The Three Shifts
             </h3>
-            <p className="text-lg text-slate-400 mb-8 leading-relaxed lg:text-right">
+            <p className="text-lg text-slate-400 mb-8 leading-relaxed">
               Concrete outcomes designed to turn you from a tool-user into a tool-builder.
             </p>
             
@@ -483,14 +483,14 @@ const ThreeShifts = () => {
                   onClick={() => setActiveIndex(i)}
                   className={`group flex items-center gap-4 p-4 rounded-xl transition-all border ${activeIndex === i ? 'bg-white border-white text-bg-deep shadow-xl' : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10'}`}
                 >
-                  <ArrowRight className={`w-4 h-4 mr-auto transition-transform rotate-180 ${activeIndex === i ? 'translate-x-0 opacity-100' : 'translate-x-2 opacity-0'}`} />
-                  <div className="text-right">
-                    <div className="text-xs font-bold uppercase tracking-wider opacity-60">{shift.title}</div>
-                    <div className="font-extrabold">{shift.label}</div>
-                  </div>
                   <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${activeIndex === i ? 'bg-bg-deep text-white' : 'bg-white/5 text-slate-500 group-hover:text-white'}`}>
                     {shift.icon}
                   </div>
+                  <div className="text-left">
+                    <div className="text-xs font-bold uppercase tracking-wider opacity-60">{shift.title}</div>
+                    <div className="font-extrabold">{shift.label}</div>
+                  </div>
+                  <ArrowRight className={`w-4 h-4 ml-auto transition-transform ${activeIndex === i ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'}`} />
                 </button>
               ))}
             </div>
@@ -499,23 +499,23 @@ const ThreeShifts = () => {
           <div className="lg:w-2/3 relative">
             <div className="aspect-[16/9] lg:aspect-video bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 p-10 flex flex-col justify-center relative overflow-hidden group min-h-[320px]">
               {/* Animated background elements */}
-              <div className="absolute top-0 left-0 w-64 h-64 bg-accent-indigo/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-accent-indigo/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
               
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
+                  exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="relative z-10 text-right"
+                  className="relative z-10"
                 >
-                  <div className="flex items-center gap-4 mb-6 justify-end">
-                    <div className="h-px flex-1 bg-white/10" />
+                  <div className="flex items-center gap-4 mb-6">
                     <span className="text-[10px] font-black text-accent-indigo uppercase tracking-[0.3em] font-mono">Context & Detail</span>
+                    <div className="h-px flex-1 bg-white/10" />
                   </div>
                   <h4 className="text-3xl font-extrabold text-white mb-4">{shifts[activeIndex].summary}</h4>
-                  <p className="text-xl text-slate-300 leading-relaxed max-w-xl ml-auto">
+                  <p className="text-xl text-slate-300 leading-relaxed max-w-xl">
                     {shifts[activeIndex].detail}
                   </p>
                 </motion.div>
