@@ -686,9 +686,9 @@ const CourseMaterials = () => {
     },
     {
       icon: <Github className="w-6 h-6" />,
-      title: "Awesome Claude Skills",
+      title: "Awesome AI Skills",
       subtitle: "GitHub · Community Collection",
-      description: "A curated repository of production-ready Claude Skills, resources, and tools. Find pre-built skills for automation, development, and workflow optimization.",
+      description: "A curated repository of production-ready AI Skills, resources, and tools. Find pre-built skills for automation, development, and workflow optimization.",
       highlight: "Includes a Project Manager skill ready to use.",
       link: "https://github.com/ComposioHQ/awesome-claude-skills",
       linkText: "Explore Repository",
