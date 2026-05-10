@@ -5,20 +5,25 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  ChevronDown, 
-  Linkedin, 
-  Mail, 
-  ArrowRight, 
-  Check, 
-  X, 
-  Zap, 
-  Brain, 
-  Bot, 
+import {
+  ChevronDown,
+  Linkedin,
+  Mail,
+  ArrowRight,
+  Check,
+  X,
+  Zap,
+  Brain,
+  Bot,
   Info,
   Calendar,
   Layout,
-  Terminal
+  Terminal,
+  FileText,
+  BookOpen,
+  Github,
+  Download,
+  ExternalLink
 } from 'lucide-react';
 
 // --- Constants & Assets ---
@@ -255,6 +260,7 @@ const Navbar = () => {
           <a href="#challenge" className="hover:text-white transition-colors">The Challenge</a>
           <a href="#shifts" className="hover:text-white transition-colors">What Changes</a>
           <a href="#syllabus" className="hover:text-white transition-colors">Syllabus</a>
+          <a href="#materials" className="hover:text-white transition-colors">Materials</a>
           <a href="#who" className="hover:text-white transition-colors">Who It's For</a>
           <a href="#about" className="hover:text-white transition-colors">Instructor</a>
           <a 
@@ -343,15 +349,6 @@ const Hero = () => {
               </div>
             </div>
             
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              className="max-w-md"
-            >
-              <div className="text-[10px] font-black text-white/20 uppercase tracking-[0.3em] font-mono mb-4">Countdown to Workshop</div>
-              <WorkshopCountdown />
-            </motion.div>
           </motion.div>
         </div>
       </div>
@@ -659,6 +656,107 @@ const Syllabus = () => {
               </motion.div>
             </AnimatePresence>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const CourseMaterials = () => {
+  const materials = [
+    {
+      icon: <FileText className="w-6 h-6" />,
+      title: "Workshop Presentation",
+      subtitle: "PDF · 16 slides",
+      description: "The complete workshop deck covering VS Code setup, context management, MCPs, and Skills. The foundation for building your AI-powered PM infrastructure.",
+      highlight: "Includes the core principle: Plan first, execute in phases.",
+      link: "./course-materials/VS_code_PM_ATT_6_7-5-2026.pdf",
+      linkText: "Download PDF",
+      isDownload: true
+    },
+    {
+      icon: <BookOpen className="w-6 h-6" />,
+      title: "Planning Skill Template",
+      subtitle: "Markdown · Reusable Template",
+      description: "A structured planning workflow you can adapt for any project. Defines vision, business logic, phased R&D plans, and deployment strategy.",
+      highlight: "The secret to smooth AI interactions: invest in planning upfront.",
+      link: "./course-materials/planning.md",
+      linkText: "View Template",
+      isDownload: true
+    },
+    {
+      icon: <Github className="w-6 h-6" />,
+      title: "Awesome Claude Skills",
+      subtitle: "GitHub · Community Collection",
+      description: "A curated repository of production-ready Claude Skills, resources, and tools. Find pre-built skills for automation, development, and workflow optimization.",
+      highlight: "Includes a Project Manager skill ready to use.",
+      link: "https://github.com/ComposioHQ/awesome-claude-skills",
+      linkText: "Explore Repository",
+      isDownload: false
+    }
+  ];
+
+  return (
+    <section id="materials" className="py-24 px-6 relative scroll-mt-[62px]">
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-16 text-center">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="w-8 h-8 rounded-full border border-accent-blue/50 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+              <div className="w-2 h-2 rounded-full bg-accent-blue"></div>
+            </div>
+            <h2 className="text-xl font-bold uppercase tracking-widest text-accent-blue font-mono">Resources</h2>
+          </div>
+          <h3 className="text-4xl font-extrabold text-white mb-6">Course Materials</h3>
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+            Everything you need to continue building after the workshop. Remember: <span className="text-white font-semibold">planning is the multiplier</span> — invest in it, and your AI interactions become dramatically smoother.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {materials.map((material, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group relative"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-b from-accent-blue/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl blur-xl" />
+              <div className="relative h-full bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-md hover:border-white/20 transition-all flex flex-col">
+                <div className="w-14 h-14 rounded-xl bg-accent-blue/10 border border-accent-blue/20 flex items-center justify-center text-accent-blue mb-6 group-hover:scale-110 transition-transform">
+                  {material.icon}
+                </div>
+
+                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">{material.subtitle}</div>
+                <h4 className="text-xl font-bold text-white mb-3">{material.title}</h4>
+                <p className="text-sm text-slate-400 leading-relaxed mb-4 flex-grow">{material.description}</p>
+
+                <div className="bg-accent-blue/5 border border-accent-blue/10 rounded-lg p-3 mb-6">
+                  <p className="text-xs text-accent-blue leading-relaxed italic">{material.highlight}</p>
+                </div>
+
+                <a
+                  href={material.link}
+                  target={material.isDownload ? "_self" : "_blank"}
+                  rel={material.isDownload ? undefined : "noopener noreferrer"}
+                  download={material.isDownload ? true : undefined}
+                  className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl text-white text-sm font-bold transition-all group/btn"
+                >
+                  {material.isDownload ? <Download className="w-4 h-4" /> : <ExternalLink className="w-4 h-4" />}
+                  {material.linkText}
+                  <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 transition-all" />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-12 p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md text-center">
+          <p className="text-slate-400 text-sm leading-relaxed">
+            <span className="text-white font-semibold">Pro tip:</span> Start with the Planning Template before diving into automation.
+            A clear plan means fewer iterations, less token consumption, and AI that actually delivers what you need.
+          </p>
         </div>
       </div>
     </section>
@@ -1062,6 +1160,7 @@ export default function App() {
         <PainPoints />
         <ThreeShifts />
         <Syllabus />
+        <CourseMaterials />
         <Progression />
         <WhoItIsFor />
         <AboutInstructor />
