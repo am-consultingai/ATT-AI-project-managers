@@ -1132,6 +1132,19 @@ const Footer = () => {
 };
 
 export default function App() {
+  // Handle hash navigation after React mounts
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, []);
+
   return (
     <div className="font-sans bg-bg-deep text-slate-100 selection:bg-accent-blue/20 selection:text-white scroll-smooth relative">
       {/* Target Audience Banner */}
